@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('node:path');
 
 const app = express();
-const PORT = 8080;
+const port = process.env.PORT || 3000;
 const indexRouter = require('./routes/indexRouter');
 
 // CSS
