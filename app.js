@@ -20,4 +20,4 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', indexRouter);
 
 
-app.listen(PORT, () => console.log(`Server is live at port ${PORT}`));
+app.listen(port, () => console.log(`Server is live at port ${port}`));
