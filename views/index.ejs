@@ -1,5 +1,26 @@
-<ul>
-    <% messages.forEach(message => { %>
-        <li> <%= message.text %> </li>
-    <% }) %>
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <div class="container">
+            <%- include('header') %>
+            <ul>
+                <% messages.forEach(message => { %>
+                    <li class="<%= message.user === 'Me' ? 'me' : '' %>">
+                        <p class="message-author"> <%= message.user %> </p>
+                        <p class="message-content"> <%= message.text %> </p>
+                        <a href="/message-details/<%= message.text %>" class="more-info">More info</a>
+                    </li>
+                <% }) %>
+            </ul>
+            <a href="/new" class="button">New message</a>
+        </div>
+    </div>
+</body>
+</html>

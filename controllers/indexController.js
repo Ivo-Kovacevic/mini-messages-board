@@ -7,8 +7,18 @@ const messages = [
       added: new Date()
     },
     {
-      text: "Hello World!",
+      text: "You can send new message by clicking 'New message'",
       user: "Charles",
+      added: new Date()
+    },
+    {
+      text: "If you put User as 'Me', your message will be on the right",
+      user: "Me",
+      added: new Date()
+    },
+    {
+      text: "If you click on message you can see more info about it",
+      user: "Bob",
       added: new Date()
     }
   ];
@@ -29,4 +39,10 @@ const storeMessage = asyncHandler(async (req, res) => {
     res.redirect('/');
 });
 
-module.exports = { showMessages, getMessage, storeMessage };
+const showMessage = asyncHandler(async (req, res) => {
+    const messageText = decodeURIComponent(req.params.text);
+    const messageDetail = messages.find(msg => msg.text === messageText);
+    res.render('message-details', { messageDetail });
+});
+
+module.exports = { showMessages, getMessage, storeMessage, showMessage };

@@ -9,4 +9,6 @@ router.get('/new', indexController.getMessage);
 
 router.post('/new', indexController.storeMessage);
 
+router.get('/message-details/:text', indexController.showMessage);
+
 module.exports = router;

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <div class="container">
+            <%- include('header') %>
+            <h1>Message Details</h1>
+            <% if (messageDetail) { %>
+                <p><strong>Author:</strong> <%= messageDetail.user %></p>
+                <p><strong>Content:</strong> <%= messageDetail.text %></p>
+                <p><strong>Time:</strong> <%= messageDetail.added %></p>
+            <% } else { %>
+                <p>Message not found.</p>
+            <% } %>
+            <br/>
+            <a href="/" class="button">Back to messages</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,14 +1,30 @@
-<form method="POST" action="/new">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <div class="container">
+            <%- include('header') %>
+            <form method="POST" action="/new">
 
-    <label for="messageAuthor">Author name</label>
-    <input name="messageAuthor">
-
-    <br/> <br/>
-
-    <label for="messageContent">Message</label>
-    <input name="messageContent">
-
-    <br/><br/>
-
-    <input type="submit" value="Submit">
-</form>
+                <label for="messageAuthor">User</label>
+                <input name="messageAuthor" value="Me">
+            
+                <br/> <br/>
+            
+                <label for="messageContent">Message</label>
+                <input name="messageContent">
+            
+                <br/><br/>
+            
+                <input type="submit" value="Submit" class="button">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
