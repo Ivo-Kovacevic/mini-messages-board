@@ -17,16 +17,23 @@ const SQL = `
 
 const main = async function () {
     try {
-        console.log("seeding...");
-        const client = new Client({
-            connectionString: `postgresql://${process.env.USER}:${process.env.PASSWORD}@${process.env.HOST}:5432/${process.env.DATABASE}`,
-        });
+        const connectionString = process.argv[2];
+        if (!connectionString) {
+            console.error('Please provide the database connection string as an argument.');
+            process.exit(1);
+        }
+
+        console.log('Seeding...');
+        const client = new Client({ connectionString });
+
         await client.connect();
         await client.query(SQL);
         await client.end();
-        console.log("done");
+
+        console.log('Done');
     } catch (error) {
-        console.error("Error during seeding: ", error);
+        console.error('Error during seeding: ', error);
+        process.exit(1);
     }
 };
 
