@@ -12,10 +12,10 @@
             <%- include('header') %>
             <ul>
                 <% messages.forEach(message => { %>
-                    <li class="<%= message.user === 'Me' ? 'me' : '' %>">
-                        <p class="message-author"> <%= message.user %> </p>
-                        <p class="message-content"> <%= message.text %> </p>
-                        <a href="/message-details/<%= message.text %>" class="more-info">More info</a>
+                    <li class="<%= message.name === 'Me' ? 'me' : '' %>">
+                        <p class="message-author"> <%= message.name %> </p>
+                        <p class="message-content"> <%= message.message %> </p>
+                        <a href="/message-details/<%= message.id %>" class="more-info">More info</a>
                     </li>
                 <% }) %>
             </ul>

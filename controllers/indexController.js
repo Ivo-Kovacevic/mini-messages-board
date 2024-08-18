@@ -1,48 +1,37 @@
-const asyncHandler = require('express-async-handler');
-
-const messages = [
-    {
-      text: "Hi there!",
-      user: "Amando",
-      added: new Date()
-    },
-    {
-      text: "You can send new message by clicking 'New message'",
-      user: "Charles",
-      added: new Date()
-    },
-    {
-      text: "If you put User as 'Me', your message will be on the right",
-      user: "Me",
-      added: new Date()
-    },
-    {
-      text: "If you click on message you can see more info about it",
-      user: "Bob",
-      added: new Date()
-    }
-  ];
-  
+const asyncHandler = require("express-async-handler");
+const db = require("../db/queries");
 
 const showMessages = asyncHandler(async (req, res) => {
-    res.render('index', { messages: messages });
+    const messages = await db.getAllMessages();
+    res.render("index", { messages });
 });
 
 const getMessage = asyncHandler(async (req, res) => {
-    res.render('form');
+    res.render("form");
 });
 
 const storeMessage = asyncHandler(async (req, res) => {
-    messageText = req.body.messageContent;
-    messageUser = req.body.messageAuthor;
-    messages.push({ text: messageText, user: messageUser, added: new Date() });
-    res.redirect('/');
+    const { messageAuthor, messageContent } = req.body;
+    await db.insertNewMessage(messageAuthor, messageContent);
+    res.redirect("/");
 });
 
 const showMessage = asyncHandler(async (req, res) => {
-    const messageText = decodeURIComponent(req.params.text);
-    const messageDetail = messages.find(msg => msg.text === messageText);
-    res.render('message-details', { messageDetail });
+    const messageId = parseInt(decodeURIComponent(req.params.id));
+    const messageDetail = await db.findMessage(messageId);
+    res.render("message-details", { messageDetail });
 });
 
-module.exports = { showMessages, getMessage, storeMessage, showMessage };
+const deleteMessage = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    await db.deleteMessage(id);
+    res.redirect("/");
+});
+
+module.exports = {
+    showMessages,
+    getMessage,
+    storeMessage,
+    showMessage,
+    deleteMessage,
+};
